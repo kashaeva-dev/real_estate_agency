@@ -1,6 +1,24 @@
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 
 from .models import Flat
+
+
+class PriceRangeListFilter(admin.SimpleListFilter):
+    title = _('Цена квартиры')
+    parameter_name = 'price'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('3000000', _('до 3 млн. руб.')),
+            ('3000001', _('больше 3 млн. руб.'))
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == '3000000':
+            return queryset.filter(price__lte=3000000)
+        if self.value() == '3000001':
+            return queryset.filter(price__gt=3000000)
 
 class FlatAdmin(admin.ModelAdmin):
     search_fields = (
@@ -19,6 +37,11 @@ class FlatAdmin(admin.ModelAdmin):
     )
     list_editable = (
         'new_building',
+    )
+    list_filter = (
+        PriceRangeListFilter,
+        'new_building',
+        'rooms_number',
     )
 
 admin.site.register(Flat, FlatAdmin)
