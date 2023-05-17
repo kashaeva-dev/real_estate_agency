@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from .models import Flat
+from .models import Flat, Complaint
 
 
 class PriceRangeListFilter(admin.SimpleListFilter):
@@ -44,4 +44,10 @@ class FlatAdmin(admin.ModelAdmin):
         'rooms_number',
     )
 
+
+class ComplaintAdmin(admin.ModelAdmin):
+    raw_id_fields = ('flat',)
+
+
 admin.site.register(Flat, FlatAdmin)
+admin.site.register(Complaint, ComplaintAdmin)
