@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from .models import Flat, Complaint
+from .models import Flat, Complaint, Owner
 
 
 class PriceRangeListFilter(admin.SimpleListFilter):
@@ -19,6 +19,7 @@ class PriceRangeListFilter(admin.SimpleListFilter):
             return queryset.filter(price__lte=3000000)
         if self.value() == '3000001':
             return queryset.filter(price__gt=3000000)
+
 
 class FlatAdmin(admin.ModelAdmin):
     search_fields = (
@@ -54,5 +55,10 @@ class ComplaintAdmin(admin.ModelAdmin):
     raw_id_fields = ('flat',)
 
 
+class OwnerAdmin(admin.ModelAdmin):
+    raw_id_fields = ('flats',)
+
+
 admin.site.register(Flat, FlatAdmin)
 admin.site.register(Complaint, ComplaintAdmin)
+admin.site.register(Owner, OwnerAdmin)
