@@ -21,6 +21,11 @@ class PriceRangeListFilter(admin.SimpleListFilter):
             return queryset.filter(price__gt=3000000)
 
 
+class FlatsInline(admin.StackedInline):
+    model = Owner.flats.through
+    raw_id_fields = ('owner', 'flat')
+
+
 class FlatAdmin(admin.ModelAdmin):
     search_fields = (
         'town',
@@ -50,6 +55,7 @@ class FlatAdmin(admin.ModelAdmin):
     raw_id_fields = (
         'likes',
     )
+    inlines = [FlatsInline]
 
 
 class ComplaintAdmin(admin.ModelAdmin):
@@ -58,6 +64,7 @@ class ComplaintAdmin(admin.ModelAdmin):
 
 class OwnerAdmin(admin.ModelAdmin):
     raw_id_fields = ('flats',)
+    inlines = [FlatsInline]
 
 
 admin.site.register(Flat, FlatAdmin)
