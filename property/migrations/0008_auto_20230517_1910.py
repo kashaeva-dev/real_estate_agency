@@ -14,6 +14,10 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='flat',
             name='likes',
-            field=models.ManyToManyField(blank=True, null=True, related_name='liked_flats', related_query_name='who_likes', to=settings.AUTH_USER_MODEL, verbose_name='Кто лайкнул'),
+            field=models.ManyToManyField(blank=True, null=True, related_name='liked_flats',
+                                         related_query_name='who_likes',
+                                         to=settings.AUTH_USER_MODEL,
+                                         verbose_name='Кто лайкнул',
+                                         ),
         ),
     ]

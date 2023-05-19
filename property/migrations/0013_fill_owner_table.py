@@ -1,4 +1,4 @@
-from django.db import migrations, models
+from django.db import migrations
 
 
 def fill_owners_from_flats(apps, schema_editor):
@@ -10,15 +10,16 @@ def fill_owners_from_flats(apps, schema_editor):
             name=flat.owner,
             owner_pure_phone=flat.owner_pure_phone,
             defaults={
-            'owners_phonenumber': flat.owners_phonenumber,
-        })
+                'owners_phonenumber': flat.owners_phonenumber,
+            },
+        )
 
 
 class Migration(migrations.Migration):
     dependencies = [
-        (('property', '0012_auto_20230517_2155'))
+        (('property', '0012_auto_20230517_2155')),
     ]
 
     operations = [
-        migrations.RunPython(fill_owners_from_flats)
+        migrations.RunPython(fill_owners_from_flats),
     ]

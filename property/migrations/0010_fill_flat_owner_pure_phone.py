@@ -26,7 +26,7 @@ def fill_owner_pure_phone(apps, schema_editor):
 
 class Migration(migrations.Migration):
     dependencies = [
-        (('property', '0009_auto_20230517_1915'))
+        (('property', '0009_auto_20230517_1915')),
     ]
 
     operations = [

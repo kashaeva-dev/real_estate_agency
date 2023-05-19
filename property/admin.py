@@ -11,7 +11,7 @@ class PriceRangeListFilter(admin.SimpleListFilter):
     def lookups(self, request, model_admin):
         return (
             ('3000000', _('до 3 млн. руб.')),
-            ('3000001', _('больше 3 млн. руб.'))
+            ('3000001', _('больше 3 млн. руб.')),
         )
 
     def queryset(self, request, queryset):
