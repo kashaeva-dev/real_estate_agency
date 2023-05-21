@@ -18,7 +18,7 @@ def prettify_phone(phone):
 def fill_owner_pure_phone(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     flats = Flat.objects.all()
-    for flat in flats:
+    for flat in flats.iterator():
         pure_phone = prettify_phone(flat.owners_phonenumber)
         flat.owner_pure_phone = pure_phone
         flat.save()
